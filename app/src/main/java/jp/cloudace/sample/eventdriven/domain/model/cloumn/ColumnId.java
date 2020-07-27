@@ -1,0 +1,8 @@
+package jp.cloudace.sample.eventdriven.domain.model.cloumn;
+
+import lombok.Value;
+
+@Value
+public class ColumnId {
+    String value;
+}
