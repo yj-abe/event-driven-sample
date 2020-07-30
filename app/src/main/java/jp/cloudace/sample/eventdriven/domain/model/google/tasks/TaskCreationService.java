@@ -1,6 +1,6 @@
 package jp.cloudace.sample.eventdriven.domain.model.google.tasks;
 
-public interface TaskService {
+public interface TaskCreationService {
 
     Task createTask(String title);
 

@@ -11,7 +11,7 @@ import jp.cloudace.sample.eventdriven.application.event.EventDispatcher;
 import jp.cloudace.sample.eventdriven.application.event.EventStore;
 import jp.cloudace.sample.eventdriven.application.persistence.Transactional;
 import jp.cloudace.sample.eventdriven.domain.model.cloumn.ColumnRepository;
-import jp.cloudace.sample.eventdriven.domain.model.google.tasks.TaskService;
+import jp.cloudace.sample.eventdriven.domain.model.google.tasks.TaskCreationService;
 import jp.cloudace.sample.eventdriven.domain.model.note.NoteRepository;
 import jp.cloudace.sample.eventdriven.domain.model.project.ProjectRepository;
 import jp.cloudace.sample.eventdriven.infrastructure.event.DomainEventResetFilter;
@@ -37,7 +37,7 @@ import jp.cloudace.sample.eventdriven.infrastructure.pubsub.LocalSafePublisher;
 import jp.cloudace.sample.eventdriven.infrastructure.pubsub.RemoteSafePublisher;
 import jp.cloudace.sample.eventdriven.infrastructure.pubsub.SafePublisher;
 import jp.cloudace.sample.eventdriven.infrastructure.serialization.DateTypeAdapter;
-import jp.cloudace.sample.eventdriven.infrastructure.service.DummyTaskService;
+import jp.cloudace.sample.eventdriven.infrastructure.service.DummyTaskCreationService;
 import jp.cloudace.sample.eventdriven.presentation.event.ConsumedEventStore;
 
 public class InfrastructureModule extends ServletModule {
@@ -82,7 +82,7 @@ public class InfrastructureModule extends ServletModule {
         bind(ConsumedEventStore.class).to(MySqlConsumedEventStore.class);
 
         // service
-        bind(TaskService.class).to(DummyTaskService.class);
+        bind(TaskCreationService.class).to(DummyTaskCreationService.class);
 
 
         // filter

@@ -5,6 +5,8 @@ import java.util.Objects;
 import jp.cloudace.sample.eventdriven.domain.common.ConcurrencyEntity;
 import jp.cloudace.sample.eventdriven.domain.event.DomainResult;
 import jp.cloudace.sample.eventdriven.domain.model.cloumn.ColumnId;
+import jp.cloudace.sample.eventdriven.domain.model.google.tasks.Task;
+import jp.cloudace.sample.eventdriven.domain.model.google.tasks.TaskCreationService;
 import jp.cloudace.sample.eventdriven.domain.model.project.ProjectId;
 import lombok.Getter;
 
@@ -43,6 +45,10 @@ public final class Note extends ConcurrencyEntity {
             throw new IllegalArgumentException("description must not be null or blank.");
         }
         this.description = description;
+    }
+
+    public Task copyToTasks(TaskCreationService service) {
+        return service.createTask(description);
     }
 
 }
