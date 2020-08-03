@@ -19,13 +19,16 @@ public class EventQueue {
 
     public void push(DomainEvent event) {
         StoredEvent<DomainEvent> storedEvent = new StoredEvent<>(event);
+        // DBへ保存
         storedEvent = store.save(storedEvent);
+        // 保存したイベントのIDをプロクシへ送信
         dispatcher.dispatchToProxy(storedEvent.getId()
                 .orElseThrow(() -> new IllegalStateException("event id is null.")));
     }
 
     public <T extends DomainEvent> Optional<T> pop(long id) {
         return store.<T>fetchById(id).map(stored -> {
+            // DBから削除することで、送信済みとして扱う。
             store.delete(stored);
             return stored.getEvent();
         });

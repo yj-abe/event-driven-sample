@@ -14,6 +14,7 @@ public class DomainEventPublisher {
             Class<T> subscribeTo,
             DomainEventSubscriber<T> subscriber
     ) {
+        // ドメインイベントの型をキーにサブスクライバを登録する
         List<DomainEventSubscriber<?>> domainEventSubscribers = SUBSCRIBERS.get()
                 .computeIfAbsent(subscribeTo, key -> new ArrayList<>());
         domainEventSubscribers.add(subscriber);
@@ -24,7 +25,7 @@ public class DomainEventPublisher {
         Class<? extends DomainEvent> key = event.getClass();
         List<DomainEventSubscriber<?>> subscribers = SUBSCRIBERS.get().get(key);
 
-        if (subscribers == null || subscribers.isEmpty()) {
+        if (subscribers == null) {
             return;
         }
 

@@ -29,6 +29,7 @@ public class DomainEventResetFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+        // スレッドがプールされ、別のリクエストによってスレッドが再利用されるので、リクエスト毎にPublisherをリセットする。
         publisher.reset();
         chain.doFilter(request, response);
     }

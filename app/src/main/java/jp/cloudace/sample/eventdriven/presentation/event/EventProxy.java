@@ -15,6 +15,7 @@ public class EventProxy extends EventReceiver {
 
     @Override
     protected void onReceive(Event event) {
+        // イベントリレーに受信したイベントのIDを渡し、本来のチャンネルに送信させる。
         eventRelay.relay(event.getEventId());
     }
 

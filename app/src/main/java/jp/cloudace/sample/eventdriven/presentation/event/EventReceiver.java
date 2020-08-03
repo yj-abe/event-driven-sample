@@ -58,6 +58,7 @@ public abstract class EventReceiver extends HttpServlet {
         resp.setStatus(HttpServletResponse.SC_OK);
     }
 
+    // 未処理の場合、サブクラスに処理を委譲する
     protected abstract void onReceive(Event event);
 
 }
